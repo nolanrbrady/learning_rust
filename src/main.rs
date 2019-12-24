@@ -21,12 +21,18 @@ fn main() {
             .expect("Failed to read line");
 
 
-        let guess: u32 = guess.trim().parse().expect("Expected a number");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Your guess was to low"),
             Ordering::Greater => println!("Your guess was to high"),
-            Ordering::Equal => println!("You win!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
         }
 
     }
