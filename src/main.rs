@@ -1,9 +1,42 @@
 use std::io;
 use std::cmp::Ordering;
 use rand::Rng;
+mod fizzbuzz;
+
+// struct Programs {
+//     FizzBuzz,
+//     GuessingGame,
+// }
 
 fn main() {
 
+    println!("Please select a program to run");
+    println!("Please select one of the following: ");
+    println!("1 for Guessing Game");
+    println!("2 for FizzBuzz");
+
+    loop {
+        let mut input = String::new();
+
+        io::stdin().read_line(&mut input).expect("Failed to read line");
+
+        let input = match input.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        match input {
+            1 => guessing_game(),
+            2 => fizzbuzz::fizz_buzz(),
+            _ => println!("Not an option, try again")
+        }
+
+    }
+}
+
+
+
+fn guessing_game() {
     println!("Welcome to the Guessing Game");
 
     // Generate random number
@@ -37,4 +70,3 @@ fn main() {
 
     }
 }
-
